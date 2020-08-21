@@ -1,0 +1,29 @@
+version: "3"
+services:
+  todo-app:
+    container_name: todo-app
+    build:
+      context: .
+      dockerfile: .Dockerfile
+    command: sh -c './postgres-wait postgres:5432 -- npm start'
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_URL: postgres://postgres:newPassword@postgres:5432/todo-db
+      NODE_ENV: development
+      PORT: 3000
+    ports:
+      - "3000:3000"
+  postgres:
+    container_name: postgres
+    image: postgres:10.4
+    ports:
+      - "5432:5432"
+    volumes: 
+      - ./postgresdata:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: newPassword
+      POSTGRES_DB: todo-db
+
+      
