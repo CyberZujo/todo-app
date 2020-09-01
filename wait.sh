@@ -71,9 +71,5 @@ do
   esac
 done
 
-if [ "$HOST" = "" -o "$PORT" = "" ]; then
-  echoerr "Error: you need to provide a host and port to test."
-  usage 2
-fi
 
 wait_for "$@"
