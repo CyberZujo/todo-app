@@ -9,4 +9,4 @@ RUN chmod +x /wait
 RUN npm install 
 
 EXPOSE 4000
-CMD /wait && npm start
+CMD /wait postgres:5432 && npm start
